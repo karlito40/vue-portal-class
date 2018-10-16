@@ -27,14 +27,14 @@ export default {
   },
   
   beforeMount() {
-    // Portal will be attach to a node with an id 'portal-root'.
+    // Portal will be attach to div#portal-root
     // If no node is found, Portal will create div#portal-root
     // at the end of document.body
     this.portal = new Portal('portal-root', this.renderPortal);
   },
 
   destroyed() {
-    // It will destroy the portal if no other components are in it
+    // It will destroy the portal if no other components is using it
     this.portal.unmount();
   },
   
@@ -46,3 +46,4 @@ export default {
   }
 }
 ```
+
