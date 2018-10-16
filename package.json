@@ -1,0 +1,38 @@
+{
+  "name": "vue-portal-class",
+  "version": "0.0.1",
+  "description": "Render children into a DOM node that exists outside the DOM hierarchy of the parent component",
+  "main": "dist/Portal.umd.js",
+  "module": "dist/Portal.esm.js",
+  "unpkg": "dist/Portal.min.js",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "vue": "^2.5.17"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karlito40/vue-portal-class.git"
+  },
+  "keywords": [
+    "portal",
+    "vue"
+  ],
+  "author": "karlito40",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karlito40/vue-portal-class/issues"
+  },
+  "homepage": "https://github.com/karlito40/vue-portal-class#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "rollup": "^0.66.6",
+    "rollup-plugin-babel": "^4.0.3"
+  },
+  "dependencies": {
+    "vue": "^2.5.17"
+  }
+}
