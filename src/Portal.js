@@ -1,9 +1,14 @@
 import Vue from 'vue';
 
-const portalPool = {
+const portalRenderer = {
   portals: {},
   
-  add(id, withRender) {
+  add(el, withRender) {
+    let id = el.dataset.vuePortal;
+    if(!id) {
+      el.dataset.vuePortal = id = Object.keys(this.portals).length;
+    }
+
     if(!this.portals[id]) {
       this.portals[id] = [];
     }
@@ -11,6 +16,7 @@ const portalPool = {
     this.portals[id].push(withRender);
 
     return {
+      id,
       dispose: renderTarget => {
         const index = this.portals[id].indexOf(renderTarget);
         if (index !== -1) {
@@ -35,12 +41,17 @@ const portalPool = {
 }
 
 export default class Portal {
-  constructor(elementId, externalRender) {
-    this.elementId = elementId;
+  constructor(source, externalRender) {
+    this.source = source;
     this.externalRender = externalRender;
+    
     const portalRoot = this.createRoot();
-
-    this.currentPool = portalPool.add(elementId, this.externalRender);
+    this.renderer = portalRenderer.add(portalRoot, this.externalRender);
+    this.attrs = {
+      id: portalRoot.id,
+      class: [...portalRoot.classList],
+      'data-vue-portal': portalRoot.dataset.vuePortal
+    };
 
     this.vue = new Vue({
       render: this.render.bind(this)
@@ -48,13 +59,8 @@ export default class Portal {
   }
 
   render(h) {
-    const components = this.currentPool.render(h);
-
-    return h('div', {
-      attrs: {
-        id: this.elementId
-      }
-    }, [components])
+    const components = this.renderer.render(h);
+    return h('div', { attrs: this.attrs }, [components])
   }
 
   update() {
@@ -70,10 +76,10 @@ export default class Portal {
   }
 
   createRoot() {
-    let portalRoot = this.getRoot();
-    if(!portalRoot) {
+    let portalRoot = this.source;
+    if(typeof this.source === 'string') {
       portalRoot = document.createElement('div')
-      portalRoot.setAttribute('id', this.elementId);
+      portalRoot.setAttribute('id', this.source);
       document.body.appendChild(portalRoot)
     }
 
@@ -81,6 +87,8 @@ export default class Portal {
   }
 
   getRoot() {
-    return document.getElementById(this.elementId);
+    return this.currentPool 
+      ? document.querySelector(`[data-vue-portal="${this.currentPool.id}"]`)
+      : null;
   }
 }

@@ -1,12 +1,13 @@
 {
   "name": "vue-portal-class",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Render children into a DOM node that exists outside the DOM hierarchy of the parent component",
   "main": "dist/Portal.umd.js",
   "module": "dist/Portal.esm.js",
   "unpkg": "dist/Portal.min.js",
   "scripts": {
     "build": "rollup -c",
+    "example": "cd example && npm i && vue serve ./App.vue",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {

@@ -1,10 +1,3 @@
-# Portals
-
-Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
-
-## Example 
-
-``` javascript
 import Portal from '../src/Portal';
 import { cloneVNode } from './VueHelper';
  
@@ -41,7 +34,7 @@ export default {
       this.portal = new Portal(root, this.renderPortal);
     */
       
-    // this.portal = new Portal(document.querySelector('.other-portal-root'), this.renderPortal);
+    // this.portal = new Portal(document.querySelector('.toto'), this.renderPortal);
   },
  
   destroyed() {
@@ -56,5 +49,3 @@ export default {
     return h('div', 'I am rendering with the normal flow without portal');
   }
 }
-```
-
