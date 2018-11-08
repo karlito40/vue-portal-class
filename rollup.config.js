@@ -1,21 +1,29 @@
 import babel from 'rollup-plugin-babel';
 
+const globals = {
+  'vue': 'Vue',
+};
+
 export default {
+  external: ['vue'],
   input: 'src/Portal.js',
   output: [
     {
       name: 'Portal',
       file: 'dist/Portal.umd.js',
-      format: 'umd'
+      format: 'umd',
+      globals
     },
     {
       file: 'dist/Portal.esm.js',
-      format: 'es'
+      format: 'es',
+      globals
     },
     {
       name: 'Portal',
       file: 'dist/Portal.min.js',
-      format: 'iife'
+      format: 'iife',
+      globals
     },
   ],
   plugins: [

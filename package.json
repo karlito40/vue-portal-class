@@ -1,6 +1,6 @@
 {
   "name": "vue-portal-class",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Render children into a DOM node that exists outside the DOM hierarchy of the parent component",
   "main": "dist/Portal.umd.js",
   "module": "dist/Portal.esm.js",
